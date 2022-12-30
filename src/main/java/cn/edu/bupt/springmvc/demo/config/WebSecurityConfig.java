@@ -36,12 +36,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .successHandler((httpServletRequest, httpServletResponse, authentication) -> {
                     System.out.println("登陆成功处理==============");
+                    httpServletRequest.getSession().setAttribute("login_fail", "0");
                     //跳转到首页
                     httpServletResponse.sendRedirect("/list");
                 })
                 .failureHandler((httpServletRequest, httpServletResponse, e) -> {
                     System.out.println("登陆失败处理=============");
-
+                    httpServletRequest.getSession().setAttribute("login_fail", "1");
                     //返回到登陆页面
                     httpServletResponse.sendRedirect("/login");
 

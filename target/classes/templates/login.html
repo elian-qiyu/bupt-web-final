@@ -17,14 +17,16 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="./login"><b>Web</b>开发技术基础</a>
+    <a href="./login"><b>BUPT</b>订餐系统</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">管理员登录</p>
-      <p class="login-box-msg">测试的账号和密码：admin</p>
-
+      <p class="login-box-msg">登 录 页 面</p>
+      <p class="login-box-msg">管理员测试：</p>
+      <p class="login-box-msg">账号admin，密码：bupt</p>
+      <p class="login-box-msg">用户测试</p>
+      <p class="login-box-msg">账号：user1，密码：123456</p>
 
       <form action="" method="post" th:action="@{/login}">
         <div class="input-group mb-3">
@@ -44,18 +46,20 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
+<!--          <div class="col-8">-->
+<!--            <div class="icheck-primary">-->
+<!--              <input type="checkbox" id="remember">-->
+<!--              <label for="remember">-->
+<!--                Remember Me-->
+<!--              </label>-->
+<!--            </div>-->
+<!--          </div>-->
           <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
+
+<!--          <div class="col-4">-->
+            <button type="submit" class="btn btn-primary btn-block">登 录</button>
+<!--          </div>-->
+
           <!-- /.col -->
         </div>
       </form>
@@ -78,8 +82,8 @@
 <!-- AdminLTE App -->
 <script src="../../js/adminlte.min.js"></script>
 
-<script>
-  document.getElementById("username").value = "admin"
-</script>
+<!--<script>-->
+<!--  document.getElementById("username").value = "admin"-->
+<!--</script>-->
 </body>
 </html>

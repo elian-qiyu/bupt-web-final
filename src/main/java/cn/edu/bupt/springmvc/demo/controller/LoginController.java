@@ -29,7 +29,9 @@ public class LoginController {
 
     //  登录验证
     @GetMapping("/login")
-    public  String login(){
+    public  String login(HttpSession session, Model model){
+        if(session.getAttribute("login_fail") == "1")
+            model.addAttribute("message", "账号或密码错误，请重新登录！！！");
         return "login";
     }
 
@@ -56,17 +58,23 @@ public class LoginController {
     String registerDone(Model model, @RequestParam(name = "username") String username,
                         @RequestParam(name = "password") String password,
                         @RequestParam(name = "password2") String password2) {
-        System.out.println(username + password + password2);
-        Users users = usersMapper.selectById(username);
-        if (users != null) {
-            model.addAttribute("msg", "用户名已存在！");
+        System.out.println("注册信息："+ username + password + password2);
+        if(!password.equals(password2)){
+            model.addAttribute("message", "两次密码必须一致！");
             return "register";
-        } else {
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            users = new Users(username, passwordEncoder.encode(password), true);
-            usersMapper.insert(users);
-            return "redirect:/login";
+        }else{
+            Users users = usersMapper.selectById(username);
+            if (users != null) {
+                model.addAttribute("message", "用户名已存在！");
+                return "register";
+            } else {
+                PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                users = new Users(username, passwordEncoder.encode(password), true);
+                usersMapper.insert(users);
+                return "redirect:/login";
+            }
         }
+
     }
 
     @GetMapping("/logout")
