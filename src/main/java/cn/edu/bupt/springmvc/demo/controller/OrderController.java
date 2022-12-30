@@ -21,10 +21,9 @@ public class OrderController {
     @Autowired
     IFoodService foodService;
 
-
-//    库存列表页
+    //    库存列表页
     @GetMapping("/list")
-    public  String list(Model model){
+    public String list(Model model) {
 //        List<Book> allBooks = new ArrayList<>(this.booksMap.values());
         List<Food> allFoods = foodService.list();
         model.addAttribute("foods", allFoods);
@@ -32,11 +31,12 @@ public class OrderController {
         return "food/food_list";
     }
 
-//    新增食物页
+    //    新增食物页
     @GetMapping("/reg")
-    public  String reg(){
+    public String reg() {
         return "food/food_reg";
     }
+
     @RequestMapping("/submit")
     public String handleFormUpload(@RequestParam("food_name") String food_name, @RequestParam("num") String num,
                                    @RequestParam("date") String date,
@@ -46,10 +46,10 @@ public class OrderController {
 //        file.transferTo(Paths.get("./upload/"+targetFilename));
 
         //保存上传的资源文件路径，路径在部署jar包或项目的同级目录。
-        String path = System.getProperty("user.dir")+"/static/upload/";
+        String path = System.getProperty("user.dir") + "/static/upload/";
         File dir = new File(path);
         // 如果不存在则创建目录
-        if(!dir.exists()){
+        if (!dir.exists()) {
             dir.mkdirs();
         }
         file.transferTo(Paths.get(path + targetFilename));
@@ -63,32 +63,5 @@ public class OrderController {
         foodService.save(food);
         model.addAttribute("food", food);
         return "food/upload_result";
-    }
-
-    //    登录页面
-    @GetMapping("")
-    public  String index(){
-        return "redirect:/login";
-    }
-
-    @GetMapping("/login")
-    public  String login(){
-        return "login";
-    }
-    @RequestMapping("/login_try")
-    public String login(HttpSession session, @RequestParam(name = "username", required = false) String username,
-                        @RequestParam(name = "password", required = false) String password, Model model){
-        if(username.equals("admin") && password.equals("admin")){
-            session.setAttribute("user", username);
-            return "redirect:/list";
-        }else{
-            model.addAttribute("message", "账号或密码错误，请重新登录！！！");
-            return "login";
-        }
-    }
-    @GetMapping("/logout")
-    public String logout(HttpSession session){
-        session.invalidate();
-        return "redirect:/login";
     }
 }
