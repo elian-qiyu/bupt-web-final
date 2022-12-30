@@ -3,6 +3,7 @@ package cn.edu.bupt.springmvc.demo.controller;
 import cn.edu.bupt.springmvc.demo.entities.Food;
 import cn.edu.bupt.springmvc.demo.service.IFoodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,9 @@ public class OrderController {
 
     //    库存列表页
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(Model model, Authentication auth) {
 //        List<Book> allBooks = new ArrayList<>(this.booksMap.values());
+        model.addAttribute("username", auth.getName());
         List<Food> allFoods = foodService.list();
         model.addAttribute("foods", allFoods);
         System.out.println(allFoods);

@@ -1,7 +1,13 @@
 package cn.edu.bupt.springmvc.demo.controller;
 
+import cn.edu.bupt.springmvc.demo.entities.Authorities;
 import cn.edu.bupt.springmvc.demo.entities.Users;
+import cn.edu.bupt.springmvc.demo.mapper.AuthoritiesMapper;
+import cn.edu.bupt.springmvc.demo.mapper.FoodMapper;
 import cn.edu.bupt.springmvc.demo.mapper.UsersMapper;
+import cn.edu.bupt.springmvc.demo.service.CustomUserService;
+import cn.edu.bupt.springmvc.demo.service.IAuthoritiesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,8 +24,12 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("")
 public class LoginController {
 
+    @Autowired
+    IAuthoritiesService iAuthoritiesService;
+
     @Resource
     UsersMapper usersMapper;
+
 
     //  返回登录页面
     @GetMapping("")
@@ -71,6 +81,13 @@ public class LoginController {
                 PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
                 users = new Users(username, passwordEncoder.encode(password), true);
                 usersMapper.insert(users);
+                Authorities authorities = new Authorities();
+                authorities.setId((long) (iAuthoritiesService.list().size() + 1));
+                authorities.setUsername(username);
+                authorities.setAuthority("ROLE_USER");
+                iAuthoritiesService.save(authorities);
+                System.out.println(authorities);
+
                 return "redirect:/login";
             }
         }

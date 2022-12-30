@@ -37,6 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler((httpServletRequest, httpServletResponse, authentication) -> {
                     System.out.println("登陆成功处理==============");
                     httpServletRequest.getSession().setAttribute("login_fail", "0");
+                    System.out.println(authentication.getAuthorities().toString());
+                    if(authentication.getAuthorities().toString().equals("[ROLE_USER]"))
+                        System.out.println("User");
+                    if(authentication.getAuthorities().toString().equals("[ROLE_ADMIN]"))
+                        System.out.println("admin");
                     //跳转到首页
                     httpServletResponse.sendRedirect("/list");
                 })
