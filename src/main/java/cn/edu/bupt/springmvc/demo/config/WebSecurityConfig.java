@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //不拦截静态资源
-        web.ignoring().antMatchers("/js/**", "/css/**", "/img/**");
+        web.ignoring().antMatchers("/js/**", "/css/**", "/img/**", "/plugins/**");
     }
 
     @Override
@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .failureHandler((httpServletRequest, httpServletResponse, e) -> {
                     System.out.println("登陆失败处理=============");
+
                     //返回到登陆页面
                     httpServletResponse.sendRedirect("/login");
 
@@ -52,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     httpServletResponse.sendRedirect("/login");
                 }))
                 .and().authorizeRequests()
-                .antMatchers("/h2-console/**", "/user/register").permitAll()
+                .antMatchers("/h2-console/**", "/register").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
