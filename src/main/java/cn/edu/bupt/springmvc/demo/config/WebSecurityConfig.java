@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .frameOptions().disable()
                 //针对h2-console关闭csrf验证
                 .and().csrf()
-                .ignoringAntMatchers("/h2-console/**", "/user/**")
+                .ignoringAntMatchers("/h2-console/**", "/app/**")
                 .and().formLogin()
                 .loginPage("/login")
                 .permitAll()
@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     if(authentication.getAuthorities().toString().equals("[ROLE_ADMIN]"))
                         System.out.println("admin");
                     //跳转到首页
-                    httpServletResponse.sendRedirect("/list");
+                    httpServletResponse.sendRedirect("/app/index");
                 })
                 .failureHandler((httpServletRequest, httpServletResponse, e) -> {
                     System.out.println("登陆失败处理=============");
@@ -60,7 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 }))
                 .and().authorizeRequests()
                 .antMatchers("/h2-console/**", "/register").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/app/admin/**").hasRole("ADMIN")
+
                 .anyRequest().authenticated();
 
     }

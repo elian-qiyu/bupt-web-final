@@ -82,7 +82,7 @@ public class LoginController {
                 users = new Users(username, passwordEncoder.encode(password), true);
                 usersMapper.insert(users);
                 Authorities authorities = new Authorities();
-                authorities.setId((long) (iAuthoritiesService.list().size() + 1));
+//                authorities.setId((long) (iAuthoritiesService.list().size() + 1));
                 authorities.setUsername(username);
                 authorities.setAuthority("ROLE_USER");
                 iAuthoritiesService.save(authorities);
