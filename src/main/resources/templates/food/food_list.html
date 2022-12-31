@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BUPT订餐系统|列表页</title>
+  <title>BUPT订餐系统 | 库存页</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -45,19 +45,31 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
+            <a href="./index" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>主页</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="./list" class="nav-link active">
               <i class="nav-icon fas fa-table"></i>
-              <p>库存列表页</p>
+              <p>库存页</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./reg" class="nav-link">
+          <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
+            <a href="./admin/food_reg" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p>登记新食物页面</p>
+              <p>新增库存页面</p>
+            </a>
+          </li>
+          <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
+            <a href="./admin/bbs_reg" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>新增BBS页面</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="./logout" class="nav-link">
+            <a href="../../logout" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>登出</p>
             </a>
@@ -76,12 +88,15 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>库存列表页</h1>
+            <h1>库存页</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item">库存列表页</li>
-              <li class="breadcrumb-item active"><a href="./reg">登记食物页面</a></li>
+              <p>当前角色：</p>
+              <li class="breadcrumb-item" th:text="${author}"></li>
+<!--              <li class="breadcrumb-item">主页</li>-->
+<!--              <li class="breadcrumb-item">库存页</li>-->
+<!--              <li class="breadcrumb-item active"><a href="./reg">新增库存页面</a></li>-->
             </ol>
           </div>
         </div>
