@@ -157,4 +157,9 @@ public class OrderController {
         return "food/bbs_edit";
     }
 
+    @GetMapping("/order")
+    public String order(){
+        return "food/food_order";
+    }
+
 }

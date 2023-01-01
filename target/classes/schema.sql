@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS `food`;
 DROP TABLE IF EXISTS `authorities`;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `bbs`;
+DROP TABLE IF EXISTS `cart`;
+
 
 CREATE TABLE `food`(
     `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -33,4 +35,12 @@ create table authorities (
      PRIMARY KEY (`id`),
      constraint fk_authorities_users foreign key(username)
          references users(username)
+);
+
+CREATE TABLE `cart`(
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `username` varchar(255) DEFAULT NULL,
+    `food_id` bigint(20) DEFAULT NULL,
+    `num` bigint(20)  DEFAULT NULL,
+PRIMARY KEY (`id`)
 );
