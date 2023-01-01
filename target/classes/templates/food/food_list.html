@@ -117,16 +117,26 @@
                   <tr>
                     <th>食物封面</th>
                     <th>食物名称</th>
-                    <th>日期</th>
+                    <th>价格</th>
                     <th>库存数量</th>
+                    <th>操作</th>
                   </tr>
                   </thead>
                   <tbody th:remove="all-but-first">
                   <tr th:each="food : ${foods}">
                     <td><img th:src="@{${food.addr}}" alt="加载失败" height="200"></td>
                     <td style="vertical-align: middle" th:text="${food.name}">Test</td>
-                    <td style="vertical-align: middle" th:text="${food.date}">Date</td>
+                    <td style="vertical-align: middle" th:text="${food.price}">Price</td>
                     <td style="vertical-align: middle" th:text="${food.stock}">Price</td>
+                    <td class="timeline-footer">
+                      <a class="btn btn-primary btn-sm" th:if ="${author}eq'[ROLE_ADMIN]'">修改</a>
+                      <a class="btn btn-danger btn-sm" th:if ="${author}eq'[ROLE_ADMIN]'">删除</a>
+                    </td>
+<!--                    <div class="timeline-footer">-->
+<!--                      <a th:href="@{/app/admin/edit(id=${bbs_2.id})}" class="btn btn-primary btn-sm" th:if ="${author}eq'[ROLE_ADMIN]'">修改</a>-->
+<!--                      <a th:href="@{/app/admin/delete(id=${bbs_2.id})}" class="btn btn-danger btn-sm" th:if ="${author}eq'[ROLE_ADMIN]'">删除</a>-->
+<!--                    </div>-->
+
                   </tr>
                 </table>
               </div>
