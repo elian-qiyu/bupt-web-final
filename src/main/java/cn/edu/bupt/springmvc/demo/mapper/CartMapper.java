@@ -8,7 +8,7 @@ public interface CartMapper extends BaseMapper<Cart> {
 
     int updateNumByid(Long id,Long num);//更新数量
 
-    int findByidanduser(Long food_id,String username);//根据用户和食物查询
+    Cart findByidanduser(Long food_id,String username);//根据用户和食物查询
 
 
 }
