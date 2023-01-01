@@ -68,6 +68,12 @@ public class OrderController {
         return "food/food_list";
     }
 
+    @GetMapping("/user/order")
+    public String food_order(Model model, Authentication auth){
+        model.addAttribute("author", auth.getAuthorities().toString());
+        return "food/food_order";
+    }
+
     //    新增食物页
     @GetMapping("/admin/food_reg")
     public String food_reg(Model model, Authentication auth) {

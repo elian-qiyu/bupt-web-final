@@ -51,6 +51,12 @@
               <p>库存页</p>
             </a>
           </li>
+          <li class="nav-item" th:if ="${author}eq'[ROLE_USER]'">
+            <a href="./user/order" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>订餐页</p>
+            </a>
+          </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
             <a href="./admin/food_reg" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
