@@ -1,6 +1,6 @@
-INSERT INTO `food` VALUES ('../../img/0001.jpeg', '香蕉', '29/12/2022', '88');
-INSERT INTO `food` VALUES ('../../img/0002.jpeg', '苹果', '30/12/2022', '23');
-INSERT INTO `food` VALUES ('../../img/0003.jpeg', '橙子', '31/12/2022', '1000');
+INSERT INTO `food` VALUES ('1', '../../img/0001.jpeg', '香蕉', '2', '88');
+INSERT INTO `food` VALUES ('2', '../../img/0002.jpeg', '苹果', '3', '23');
+INSERT INTO `food` VALUES ('3', '../../img/0003.jpeg', '橙子', '5', '1000');
 INSERT INTO `users` VALUES ('admin', '$2a$10$19OTdMBal7M.sHw642Ayz.yK02JKyBOE1bwTeXbQHiROmHLrnn9Zm',1);
 INSERT INTO `authorities` VALUES (1,'admin', 'ROLE_ADMIN');
 INSERT INTO `users` VALUES ('user', '$2a$10$xAwa3A/Dan0.h5QGJGcP0.5L1Y825TUpwUIh.pc9kZUv7vseHGxK2',2);

@@ -114,7 +114,7 @@ public class OrderController {
 
     @RequestMapping("/admin/submit/food")
     public String handleFormUpload(@RequestParam("food_name") String food_name, @RequestParam("num") String num,
-                                   @RequestParam("date") String date,
+                                   @RequestParam("price") String price,
                                    @RequestPart("photo") MultipartFile file, Model model) throws IOException {
         String originalFilename = file.getOriginalFilename();
         String targetFilename = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -133,7 +133,7 @@ public class OrderController {
         Food food = new Food();
         food.setAddr(path);
         food.setName(food_name);
-        food.setDate(date);
+        food.setPrice(price);
         food.setStock(num);
         foodService.save(food);
 //        model.addAttribute("food", food);

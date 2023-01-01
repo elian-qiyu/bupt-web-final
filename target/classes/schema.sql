@@ -4,11 +4,12 @@ DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `bbs`;
 
 CREATE TABLE `food`(
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
     `addr` varchar(255) DEFAULT NULL,
     `name` varchar(255) DEFAULT NULL,
-    `date` varchar(255) DEFAULT NULL,
+    `price` varchar(255) DEFAULT NULL,
     `stock` varchar(255) DEFAULT NULL,
-PRIMARY KEY (`name`)
+PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `bbs`(
