@@ -51,12 +51,6 @@
               <p>库存页</p>
             </a>
           </li>
-          <li class="nav-item" th:if ="${author}eq'[ROLE_USER]'">
-            <a href="./user/order" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>订餐页</p>
-            </a>
-          </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
             <a href="./admin/food_reg" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -67,6 +61,12 @@
             <a href="./admin/bbs_reg" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>新增BBS页面</p>
+            </a>
+          </li>
+          <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
+            <a href="./admin/user" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>用户管理页</p>
             </a>
           </li>
           <li class="nav-item">

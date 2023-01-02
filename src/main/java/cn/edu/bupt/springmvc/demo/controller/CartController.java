@@ -21,7 +21,7 @@ public class CartController {
 
     @RequestMapping("add_to_cart")
     public JsonRsult<Void> addToCart(long num, long food_id, HttpSession session, Authentication authentication) {
-        cartService.addtoCart(food_id, authentication.getAuthorities().toString(), num);
+        cartService.addtoCart(food_id, authentication.getName(), num);
         return new JsonRsult<>(OK);
     }
 }

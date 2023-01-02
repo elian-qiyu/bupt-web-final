@@ -1,9 +1,13 @@
 package cn.edu.bupt.springmvc.demo.controller;
 
+import cn.edu.bupt.springmvc.demo.entities.Authorities;
 import cn.edu.bupt.springmvc.demo.entities.Bbs;
 import cn.edu.bupt.springmvc.demo.entities.Food;
+import cn.edu.bupt.springmvc.demo.entities.Users;
+import cn.edu.bupt.springmvc.demo.service.IAuthoritiesService;
 import cn.edu.bupt.springmvc.demo.service.IBbsService;
 import cn.edu.bupt.springmvc.demo.service.IFoodService;
+import cn.edu.bupt.springmvc.demo.service.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -28,6 +32,11 @@ public class OrderController {
     @Autowired
     IBbsService bbsService;
 
+    @Autowired
+    IUsersService usersService;
+
+    @Autowired
+    IAuthoritiesService authoritiesService;
 
     //  主页
     @GetMapping("/index")
@@ -160,6 +169,18 @@ public class OrderController {
     @GetMapping("/order")
     public String order(){
         return "food/food_order";
+    }
+
+    @GetMapping("/admin/user")
+    public String user(Model model, Authentication auth){
+        model.addAttribute("author", auth.getAuthorities().toString());
+        model.addAttribute("username", auth.getName());
+        List<Authorities> authentications = authoritiesService.list();
+        List<Users> users = usersService.list();
+        model.addAttribute("users", authentications);
+        model.addAttribute("users1", users);
+
+        return "food/user_list";
     }
 
 }
