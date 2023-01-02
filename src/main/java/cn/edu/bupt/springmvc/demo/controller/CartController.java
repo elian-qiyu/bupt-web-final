@@ -18,6 +18,6 @@ public class CartController {
 
     @RequestMapping("add_to_cart")
     public JsonRsult<Void> addToCart(long num, long food_id, HttpSession session){
-        cartService.addtoCart(id,food_id,username,num);
+        cartService.addtoCart(food_id,username,num);
         return new JsonRsult<>(OK);
 }

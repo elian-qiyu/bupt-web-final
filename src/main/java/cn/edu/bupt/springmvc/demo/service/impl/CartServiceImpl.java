@@ -15,11 +15,10 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
     @Autowired
     private FoodMapper foodMapper;
     @Override
-    public void addtoCart(Long id, Long food_id, String username, long num) {
+    public void addtoCart(Long food_id, String username, long num) {
         Cart result=cartMapper.findByidanduser(food_id,username);
         if(result==null){
             Cart cart=new Cart();
-            cart.setid(id);
             cart.setfood(food_id);
             cart.setuser(username);
             cart.setnum(num);
