@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BUPT订餐系统 | 新增BBS页面</title>
+  <title>BUPT订餐系统 | 修改用户页面</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -59,13 +59,13 @@
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
-            <a href="../admin/bbs_reg" class="nav-link active">
+            <a href="../admin/bbs_reg" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>新增BBS页面</p>
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
-            <a href="../admin/user" class="nav-link">
+            <a href="./admin/user" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>用户管理页</p>
             </a>
@@ -90,7 +90,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>新增BBS页面</h1>
+            <h1>修改BBS页面</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -98,7 +98,7 @@
               <li class="breadcrumb-item" th:text="${author}"></li>
 <!--              <li class="breadcrumb-item">主页</li>-->
 <!--              <li class="breadcrumb-item active"><a href="./list">库存页</a></li>-->
-<!--              <li class="breadcrumb-item">新增库存页面</li>-->
+<!--              <li class="breadcrumb-item">登记食物页面</li>-->
             </ol>
           </div>
         </div>
@@ -118,16 +118,31 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" action="/app/admin/submit/bbs" onsubmit="return checkForm()" enctype="multipart/form-data">
+<!--              th:href="@{/app/admin/edit(id=${bbs_3.id})}"-->
+              <form method="post" th:action="@{/app/admin/submit/user(id=${auth.id}, username=${auth.username})}" onsubmit="return checkForm()" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>站内消息BBS标题</label>
-                    <input type="text" class="form-control" name="bbs_title" placeholder="输入站内消息BBS标题" required>
+                    <label>用户ID</label>
+                    <input type="number" class="form-control" id="id" name="id" disabled th:value="${auth.id}" required>
                   </div>
                   <div class="form-group">
-                    <label>站内消息BBS內文</label>
-<!--                    <input type="text" class="form-control" id="num" name="num" placeholder="输入站内消息BBS內文" required>-->
-                    <textarea class="form-control" rows="3" name="bbs_body" placeholder="输入站内消息BBS內文 ..." required></textarea>
+                    <label>用户名</label>
+                    <input type="text" class="form-control" name="username" placeholder="输入用户名" disabled th:value="${auth.username}" required>
+                  </div>
+                  <div class="form-group">
+                    <label>用户權限</label>
+                    <input type="text" class="form-control" name="auth" placeholder="输入用户權限" th:value="${auth.authority}" required>
+                  </div>
+                  <p>用户狀态：</p>
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="radio" value="1" th:checked="${user.enabled}">
+                      <label class="form-check-label">啟用</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="radio" value="0" th:checked="!${user.enabled}">
+                      <label class="form-check-label">禁用</label>
+                    </div>
                   </div>
                   <!-- Date dd/mm/yyyy -->
 <!--                  <div class="form-group">-->
