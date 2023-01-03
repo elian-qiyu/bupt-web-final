@@ -15,7 +15,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
     @Autowired
     private FoodMapper foodMapper;
     @Override
-    public void addtoCart(Long food_id, String username, long num) {
+    public void addtoCart(Long food_id, String username, Long num) {
         Cart result=cartMapper.findByidanduser(food_id,username);
         if(result==null){
             Cart cart=new Cart();

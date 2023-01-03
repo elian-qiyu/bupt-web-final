@@ -12,10 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -79,8 +76,13 @@ public class LoginController {
                 return "register";
             } else {
                 PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                users = new Users(username, passwordEncoder.encode(password), true);
-                usersMapper.insert(users);
+
+                Users user = new Users(username,passwordEncoder.encode(password),true);
+                user.setUsername(username);
+                user.setPassword(passwordEncoder.encode(password));
+                user.setEnabled(true);
+//                users = new Users(username, passwordEncoder.encode(password), true);
+                usersMapper.insert(user);
                 Authorities authorities = new Authorities();
 //                authorities.setId((long) (iAuthoritiesService.list().size() + 1));
                 authorities.setUsername(username);

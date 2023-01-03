@@ -13,6 +13,33 @@
   <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../css/adminlte.min.css">
+  <script>
+    function io1() {
+      $.post({
+        url:"/register.action",
+        data:{"name":$("#username").val()},
+        success:function (data){
+          if(data.toString()=="ok"){
+            $("#nameinfo").css("color","green");
+          }else{
+            $("#nameinfo").css("color","red");
+          }
+          console.log(data);
+        }
+      })
+    }
+    function io2() {
+      $.post("/register",{"password":$("#password2").val()},function (data) {
+        if($("#password2").val()==$("#password").val()){
+          $("#pwdinfo").css("color","green");
+          $("#pwdinfo").html("ok");
+        }else{
+          $("#pwdinfo").css("color","red");
+          $("#pwdinfo").html("两次密码不一致");
+        }
+      })
+    }
+  </script>
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -24,9 +51,9 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">注 册 页 面</p>
 
-      <form action="" method="post" th:action="@{/register}">
+      <form>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username" id="username" name = "username" required>
+          <input type="text" class="form-control" placeholder="Username" id="username" name = "username" onblur="io1()" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -42,7 +69,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password" id="password2", name = "password2" required>
+          <input type="password" class="form-control" placeholder="Retype password" id="password2" name = "password2"  onblur="io2()" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -69,7 +96,8 @@
       </form>
 
       <a href="login.html" class="text-center">我有账号，点击登录！</a>
-      <p th:text="${message}" class="login-box-msg"></p>
+      <span id="pwdinfo"></span>
+      <span id="nameinfo"></span>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

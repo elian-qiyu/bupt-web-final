@@ -141,7 +141,7 @@
                       <a class="btn btn-primary btn-sm" th:if ="${author}eq'[ROLE_ADMIN]'">修改</a>
                       <a class="btn btn-danger btn-sm" th:if ="${author}eq'[ROLE_ADMIN]'">删除</a>
                       <input type="number" class="form-control" id="price" name="price" value="0" min="0" laceholder="输入加购数量" th:if ="${author}eq'[ROLE_USER]'">
-                      <a id="addToCart" type="button" class="btn btn-primary btn-sm" th:if ="${author}eq'[ROLE_USER]'" >加购</a>
+                      <a id="addToCart" type="button" class="btn btn-default go-cart" th:if ="${author}eq'[ROLE_USER]'" >加购</a>
                     </td>
 <!--                    <div class="timeline-footer">-->
 <!--                      <a th:href="@{/app/admin/edit(id=${bbs_1.id})}" class="btn btn-primary btn-sm" th:if ="${author}eq'[ROLE_ADMIN]'">修改</a>-->
@@ -216,9 +216,9 @@
     });
   });
 
-  $("addToCart").onclick(function (){
+  $("addToCart").click(function (){
     $.ajax({
-      url:"/carts/add_to_cart",
+      url:"/carts/add_to_cart.html",
       type:"POST",
       data:{
         "num":$("#price").val()

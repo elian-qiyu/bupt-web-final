@@ -20,7 +20,7 @@ public class CartController {
     private ICartService cartService;
 
     @RequestMapping("add_to_cart")
-    public JsonRsult<Void> addToCart(long num, long food_id, HttpSession session, Authentication authentication) {
+    public JsonRsult<Void> addToCart(Long num, Long food_id, HttpSession session, Authentication authentication) {
         cartService.addtoCart(food_id, authentication.getName(), num);
         return new JsonRsult<>(OK);
     }
