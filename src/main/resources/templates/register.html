@@ -15,14 +15,16 @@
   <link rel="stylesheet" href="../../css/adminlte.min.css">
   <script>
     function io1() {
-      $.post("/register",{"password":$("#password2").val()},function (data) {
+      $.post("/register",
+              {"password":$("#password").val(),
+                "username":$("#username").val(),
+                "password2":$("#password2").val()}, function (data) {
         if($("#username").val()!="dsds"){
           $("#nameinfo").css("color","green");
-          $("#nameinfo").html("ok");
         }else{
           $("#nameinfo").css("color","red");
-          $("#nameinfo").html("该用户名已存在");
         }
+        $("#nameinfo").html(data);
       })
     }
 
