@@ -15,21 +15,14 @@
   <link rel="stylesheet" href="../../css/adminlte.min.css">
   <script>
     function io1() {
-      $.post("/register",
-              {"password":$("#password").val(),
-                "username":$("#username").val(),
-                "password2":$("#password2").val()}, function (data) {
-        if($("#username").val()!="dsds"){
-          $("#nameinfo").css("color","green");
-        }else{
-          $("#nameinfo").css("color","red");
-        }
+      $.post("/check", {"username":$("#username").val(),}, function (data) {
         $("#nameinfo").html(data);
+        if(document.getElementById("nameinfo").innerText === "提示：用户名可使用！") $("#nameinfo").css("color","green");
+        else $("#nameinfo").css("color", "red");
       })
     }
 
     function io2() {
-      $.post("/register",{"password":$("#password2").val()},function (data) {
         if($("#password2").val()==$("#password").val()){
           $("#pwdinfo").css("color","green");
           $("#pwdinfo").html("ok");
@@ -37,7 +30,6 @@
           $("#pwdinfo").css("color","red");
           $("#pwdinfo").html("两次密码不一致");
         }
-      })
     }
   </script>
 </head>
@@ -49,8 +41,9 @@
 
   <div class="card">
     <div class="card-body register-card-body">
-      <p class="login-box-msg">注 册 页 面</p>
 
+      <p class="login-box-msg">注 册 页 面</p>
+      <span th:if="${message} ne ''" th:text="${message}"></span>
       <form action="/register" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Username" id="username" name = "username"  onblur="io1()" required>
@@ -88,6 +81,8 @@
           <!-- /.col -->
 
 <!--          <div class="col-4">-->
+          <span id="pwdinfo"></span>
+          <span id="nameinfo"></span>
             <button type="submit" class="btn btn-primary btn-block">立 即 注 册</button>
 <!--          </div>-->
 
@@ -96,8 +91,7 @@
       </form>
 
       <a href="login.html" class="text-center">我有账号，点击登录！</a>
-      <span id="pwdinfo"></span>
-      <span id="nameinfo"></span>
+
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

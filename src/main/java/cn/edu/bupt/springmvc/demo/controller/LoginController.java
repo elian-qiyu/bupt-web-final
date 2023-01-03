@@ -7,15 +7,13 @@ import cn.edu.bupt.springmvc.demo.mapper.FoodMapper;
 import cn.edu.bupt.springmvc.demo.mapper.UsersMapper;
 import cn.edu.bupt.springmvc.demo.service.CustomUserService;
 import cn.edu.bupt.springmvc.demo.service.IAuthoritiesService;
+import cn.edu.bupt.springmvc.demo.service.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -29,6 +27,9 @@ public class LoginController {
 
     @Resource
     UsersMapper usersMapper;
+
+    @Autowired
+    IUsersService usersService;
 
 
     //  返回登录页面
@@ -70,17 +71,23 @@ public class LoginController {
                         @RequestParam(name = "password2") String password2) {
         System.out.println("注册信息："+ username + password + password2);
         if(!password.equals(password2)){
-            model.addAttribute("message", "两次密码必须一致！");
+            model.addAttribute("message", "注册失败：两次密码必须一致！");
             return "register";
         }else{
             Users users = usersMapper.selectById(username);
             if (users != null) {
-                model.addAttribute("message", "用户名已存在！");
+                model.addAttribute("message", "注册失败：用户名已存在！");
                 return "register";
             } else {
                 PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                users = new Users();
-                usersMapper.insert(users);
+
+                Users user = new Users();
+                user.setUsername(username);
+                user.setPassword(passwordEncoder.encode(password));
+                user.setEnabled(true);
+//                users = new Users(username, passwordEncoder.encode(password), true);
+                usersMapper.insert(user);
+
                 Authorities authorities = new Authorities();
 //                authorities.setId((long) (iAuthoritiesService.list().size() + 1));
                 authorities.setUsername(username);
@@ -92,6 +99,17 @@ public class LoginController {
             }
         }
 
+    }
+    @ResponseBody
+    @PostMapping("/check")
+    String check(@RequestParam(name = "username") String username){
+        System.out.println("check:" + username);
+        Users users = usersService.getById(username);
+        String text;
+        if(username.equals("")) text = "提示：用户名不能为空！";
+        else if(users == null) text = "提示：用户名可使用！";
+        else text = "提示：用户名已佔用！";
+        return text;
     }
 
     @GetMapping("/logout")

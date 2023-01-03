@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .frameOptions().disable()
                 //针对h2-console关闭csrf验证
                 .and().csrf()
-                .ignoringAntMatchers("/h2-console/**", "/app/**")
+                .ignoringAntMatchers("/h2-console/**", "/app/**", "/check", "/register")
                 .and().formLogin()
                 .loginPage("/login")
                 .permitAll()
@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     httpServletResponse.sendRedirect("/login");
                 }))
                 .and().authorizeRequests()
-                .antMatchers("/h2-console/**", "/register").permitAll()
+                .antMatchers("/h2-console/**", "/register", "/check").permitAll()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/app/admin/**").hasRole("ADMIN")
 
