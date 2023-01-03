@@ -14,20 +14,6 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../../css/adminlte.min.css">
   <script>
-    function io1() {
-      $.post({
-        url:"/register.action",
-        data:{"name":$("#username").val()},
-        success:function (data){
-          if(data.toString()=="ok"){
-            $("#nameinfo").css("color","green");
-          }else{
-            $("#nameinfo").css("color","red");
-          }
-          console.log(data);
-        }
-      })
-    }
     function io2() {
       $.post("/register",{"password":$("#password2").val()},function (data) {
         if($("#password2").val()==$("#password").val()){
@@ -51,9 +37,9 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">注 册 页 面</p>
 
-      <form>
+      <form action="/register" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username" id="username" name = "username" onblur="io1()" required>
+          <input type="text" class="form-control" placeholder="Username" id="username" name = "username"  required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
