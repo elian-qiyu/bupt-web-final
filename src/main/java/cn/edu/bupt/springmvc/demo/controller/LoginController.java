@@ -79,7 +79,7 @@ public class LoginController {
                 return "register";
             } else {
                 PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                users = new Users(username, passwordEncoder.encode(password), true);
+                users = new Users();
                 usersMapper.insert(users);
                 Authorities authorities = new Authorities();
 //                authorities.setId((long) (iAuthoritiesService.list().size() + 1));
