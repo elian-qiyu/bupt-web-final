@@ -148,7 +148,7 @@
                     <td class="timeline-footer" th:if="${user.id}ne'1'">
                       <a th:href="@{/app/admin/edit(type='user', id=${user.id})}" class="btn btn-primary btn-sm">修改</a>
                       <a th:href="@{/app/admin/delete(type='user', id=${user.id})}" class="btn btn-danger btn-sm">删除</a>
-                    <td style="vertical-align: middle" th:if="${user.id}eq'1'">无法操作</td>
+                    <td style="vertical-align: middle" th:if="${user.id}eq'1'">不允许操作</td>
 
                     </td>
 <!--                    <div class="timeline-footer">-->

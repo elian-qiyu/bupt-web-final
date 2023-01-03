@@ -15,3 +15,7 @@ INSERT INTO `users` VALUES ('user3', '$2a$10$diJW7JtCkLY1cMc.Q0TKLuFwZQJNRmD3tIr
 INSERT INTO `authorities` VALUES (4,'user3', 'ROLE_USER');
 INSERT INTO `users` VALUES ('bupt', '$2a$10$awSdydwIarHocf59LqDHL.rjtWOgzPotSi6acZDzoNziJN5dg717e',1);
 INSERT INTO `authorities` VALUES (5,'bupt', 'ROLE_ADMIN');
+INSERT INTO `address` VALUES (1,'北京', '北京', '海淀区西土城路', 'user');
+INSERT INTO `address` VALUES (2,'北京', '北京', '昌平区南丰路', 'user');
+INSERT INTO `address` VALUES (3,'北京', '北京', '昌平区北七家镇郑各庄村', 'user2');
+

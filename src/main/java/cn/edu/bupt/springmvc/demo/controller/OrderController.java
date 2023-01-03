@@ -1,13 +1,8 @@
 package cn.edu.bupt.springmvc.demo.controller;
 
-import cn.edu.bupt.springmvc.demo.entities.Authorities;
-import cn.edu.bupt.springmvc.demo.entities.Bbs;
-import cn.edu.bupt.springmvc.demo.entities.Food;
-import cn.edu.bupt.springmvc.demo.entities.Users;
-import cn.edu.bupt.springmvc.demo.service.IAuthoritiesService;
-import cn.edu.bupt.springmvc.demo.service.IBbsService;
-import cn.edu.bupt.springmvc.demo.service.IFoodService;
-import cn.edu.bupt.springmvc.demo.service.IUsersService;
+import cn.edu.bupt.springmvc.demo.entities.*;
+import cn.edu.bupt.springmvc.demo.service.*;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -39,6 +34,9 @@ public class OrderController {
 
     @Autowired
     IAuthoritiesService authoritiesService;
+
+    @Autowired
+    IAddressService addressService;
 
     //  主页
     @GetMapping("/index")
@@ -236,7 +234,9 @@ public class OrderController {
     public String address(Model model, Authentication auth){
         model.addAttribute("username", auth.getName());
         model.addAttribute("author", auth.getAuthorities().toString());
-
+        List<Address> addresses = addressService.list(new QueryWrapper<Address>().eq("user", auth.getName()));
+        System.out.println(addresses);
+        model.addAttribute("adrs", addresses);
         return "food/adr_list";
     }
 
@@ -244,14 +244,26 @@ public class OrderController {
     public String add_address(Model model, Authentication auth){
         model.addAttribute("username", auth.getName());
         model.addAttribute("author", auth.getAuthorities().toString());
-
         return "food/adr_reg";
     }
 
     @RequestMapping("/adr_add")
-    public String handleFormUpload(){
+    public String handleFormUpload1(@RequestParam("province") String province, @RequestParam("city") String city,
+                                   @RequestParam("street") String street, Authentication auth){
+        Address address = new Address();
+        address.setCity(city);
+        address.setProvince(province);
+        address.setStreet(street);
+        address.setUser(auth.getName());
+        System.out.println(address);
+        addressService.save(address);
+        return "redirect:/app/adr";
+    }
 
-        return "redirect:/app/food/adr";
+    @GetMapping("/deleteAdr")
+    public String deleteAdr(@RequestParam("id") int id){
+        addressService.removeById(id);
+        return "redirect:/app/adr";
     }
 
 }

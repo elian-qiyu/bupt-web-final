@@ -141,7 +141,7 @@
                   <tbody th:remove="all-but-first">
                   <tr th:each="adr, iterStat: ${adrs}">
                     <td style="vertical-align: middle" th:text="${adr.id}">id</td>
-                    <td style="vertical-align: middle" th:text="${adr.Province}">Province</td>
+                    <td style="vertical-align: middle" th:text="${adr.province}">Province</td>
                     <td style="vertical-align: middle" th:text="${adr.city}">city</td>
                     <td style="vertical-align: middle" th:text="${adr.street}">street</td>
                     <!--                    <td style="vertical-align: middle" th:text="${users1[iterStat.index].enabled}">statue</td>-->
@@ -150,6 +150,7 @@
                     </td>
 
                   </tr>
+
                 </table>
               </div>
               <!-- /.card-body -->
