@@ -233,8 +233,25 @@ public class OrderController {
     }
 
     @GetMapping("/adr")
-    public String address(){
+    public String address(Model model, Authentication auth){
+        model.addAttribute("username", auth.getName());
+        model.addAttribute("author", auth.getAuthorities().toString());
+
         return "food/adr_list";
+    }
+
+    @GetMapping("/addAdr")
+    public String add_address(Model model, Authentication auth){
+        model.addAttribute("username", auth.getName());
+        model.addAttribute("author", auth.getAuthorities().toString());
+
+        return "food/adr_reg";
+    }
+
+    @RequestMapping("/adr_add")
+    public String handleFormUpload(){
+
+        return "redirect:/app/food/adr";
     }
 
 }

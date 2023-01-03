@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS `authorities`;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `bbs`;
 DROP TABLE IF EXISTS `cart`;
+DROP TABLE IF EXISTS `adr`;
 
 
 CREATE TABLE `food`(
@@ -43,4 +44,13 @@ CREATE TABLE `cart`(
     `food_id` bigint(20) DEFAULT NULL,
     `num` bigint(20)  DEFAULT NULL,
 PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `adr`(
+   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+   `province` varchar(255) DEFAULT NULL,
+   `city` varchar(255) DEFAULT NULL,
+   `street` varchar(255) DEFAULT NULL,
+   `user` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`id`)
 );
