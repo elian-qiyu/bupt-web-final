@@ -13,9 +13,9 @@ public class Users {
     private String password;
     private Boolean enabled;
 
-    public Users(String username, String password, Boolean enabled) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-    }
+//    public Users(String username, String password, Boolean enabled) {
+//        this.username = username;
+//        this.password = password;
+//        this.enabled = enabled;
+//    }
 }

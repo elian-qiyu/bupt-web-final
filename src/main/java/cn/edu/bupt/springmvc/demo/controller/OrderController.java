@@ -8,6 +8,7 @@ import cn.edu.bupt.springmvc.demo.service.IAuthoritiesService;
 import cn.edu.bupt.springmvc.demo.service.IBbsService;
 import cn.edu.bupt.springmvc.demo.service.IFoodService;
 import cn.edu.bupt.springmvc.demo.service.IUsersService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.management.Query;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -150,20 +152,48 @@ public class OrderController {
     }
 
     @GetMapping("/admin/delete")
-    public String delete(@RequestParam("id") int id){
-        System.out.println("Delete id:" +id);
-        bbsService.removeById(id);
-        return "redirect:/app/index";
+    public String delete(@RequestParam("type") String type, @RequestParam("id") int id){
+        switch (type){
+            case "bbs":
+                System.out.println("Delete id:" +id);
+                bbsService.removeById(id);
+                return "redirect:/app/index";
+            case "user":
+                Authorities authorities = authoritiesService.getById(id);
+                Users users = usersService.getById(authorities.getUsername());
+                System.out.println(users);
+                String name = users.getUsername();
+                System.out.println(name);
+                authoritiesService.removeById(id);
+                usersService.removeById(name);
 
+                return "redirect:/app/admin/user";
+        }
+
+        return "err";
     }
 
     @GetMapping("/admin/edit")
-    public String edit(@RequestParam("id") int id, Model model, Authentication auth){
-        Bbs bbs = new Bbs();
-        bbs = bbsService.getById(id);
-        model.addAttribute("bbs", bbs);
-        model.addAttribute("author", auth.getAuthorities().toString());
-        return "food/bbs_edit";
+    public String edit(@RequestParam("type") String type, @RequestParam("id") int id, Model model, Authentication auth){
+        switch (type){
+            case "bbs":
+                Bbs bbs = new Bbs();
+                bbs = bbsService.getById(id);
+                model.addAttribute("bbs", bbs);
+                model.addAttribute("author", auth.getAuthorities().toString());
+                return "food/bbs_edit";
+            case "user":
+                Authorities authorities = new Authorities();
+                authorities = authoritiesService.getById(id);
+
+                List<Users> users = usersService.list();
+                model.addAttribute("auth", authorities);
+                model.addAttribute("user",users.get(id-1));
+                System.out.println(authorities);
+                System.out.println(users);
+                return "food/user_edit";
+        }
+        return "err";
     }
 
     @GetMapping("/order")
@@ -181,6 +211,25 @@ public class OrderController {
         model.addAttribute("users1", users);
 
         return "food/user_list";
+    }
+
+
+    @RequestMapping("/admin/submit/user")
+    public String handleFormUpload(@RequestParam("id") int id, @RequestParam("username") String username,
+                                   @RequestParam(value = "auth") String auth, @RequestParam(value = "radio") boolean enabled){
+        Authorities authorities = new Authorities();
+        Users users = new Users();
+        authorities = authoritiesService.getById(id);
+
+        authorities.setAuthority(auth);
+        authorities.setUsername(username);
+        users = usersService.getById(username);
+        users.setEnabled(enabled);
+        authoritiesService.updateById(authorities);
+        usersService.updateById(users);
+        System.out.println(users);
+
+        return "redirect:/app/admin/user";
     }
 
 }
