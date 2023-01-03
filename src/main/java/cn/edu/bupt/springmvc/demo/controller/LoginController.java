@@ -102,7 +102,7 @@ public class LoginController {
     }
     @ResponseBody
     @PostMapping("/check")
-    String check(@RequestParam(name = "username") String username){
+    String check(String username){
         System.out.println("check:" + username);
         Users users = usersService.getById(username);
         String text;
