@@ -14,6 +14,18 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../../css/adminlte.min.css">
   <script>
+    function io1() {
+      $.post("/register",{"password":$("#password2").val()},function (data) {
+        if($("#username").val()!="dsds"){
+          $("#nameinfo").css("color","green");
+          $("#nameinfo").html("ok");
+        }else{
+          $("#nameinfo").css("color","red");
+          $("#nameinfo").html("该用户名已存在");
+        }
+      })
+    }
+
     function io2() {
       $.post("/register",{"password":$("#password2").val()},function (data) {
         if($("#password2").val()==$("#password").val()){
@@ -39,7 +51,7 @@
 
       <form action="/register" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username" id="username" name = "username"  required>
+          <input type="text" class="form-control" placeholder="Username" id="username" name = "username"  onblur="io1()" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
