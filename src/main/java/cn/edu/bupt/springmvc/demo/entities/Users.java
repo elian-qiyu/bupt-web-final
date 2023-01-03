@@ -14,7 +14,6 @@ public class Users {
 
     private String password;
     private Boolean enabled;
-    private List<Address> address;
 //    public Users(String username, String password, Boolean enabled) {
 //        this.username = username;
 //        this.password = password;

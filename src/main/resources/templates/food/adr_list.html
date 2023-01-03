@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BUPT订餐系统 | 用户管理页</title>
+  <title>BUPT订餐系统 | 地址管理页</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -48,43 +48,43 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="../index" class="nav-link">
+            <a href="./index" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>主页</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../list" class="nav-link">
+            <a href="./list" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>库存页</p>
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
-            <a href="../admin/food_reg" class="nav-link">
+            <a href="./admin/food_reg" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>新增库存页面</p>
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
-            <a href="../admin/bbs_reg" class="nav-link">
+            <a href="./admin/bbs_reg" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>新增BBS页面</p>
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
-            <a href="../admin/user" class="nav-link active">
+            <a href="./admin/user" class="nav-link active">
               <i class="nav-icon fas fa-edit"></i>
               <p>用户管理页</p>
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_USER]'">
-            <a href="../adr" class="nav-link">
+            <a href="./adr" class="nav-link active">
               <i class="nav-icon fas fa-edit"></i>
               <p>地址管理页</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../logout" class="nav-link">
+            <a href="./../logout" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>登出</p>
             </a>
@@ -103,7 +103,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>用户管理页</h1>
+            <h1>地址管理页</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -126,35 +126,29 @@
             <div class="card">
 
               <!-- /.card-header -->
+              <a href="/app/addAdr" class="btn btn-primary btn-sm">新增地址</a>
               <div class="card-body"  style ="align-content: center">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>用户ID</th>
-                    <th>用户名称</th>
-                    <th>用户权限</th>
-                    <th>用户状态</th>
+                    <th>地址ID</th>
+                    <th>省份</th>
+                    <th>城市</th>
+                    <th>街道</th>
                     <th>操作</th>
                   </tr>
                   </thead>
                   <tbody th:remove="all-but-first">
-                  <tr th:each="user, iterStat: ${users}">
-                    <td style="vertical-align: middle" th:text="${user.id}">id</td>
-                    <td style="vertical-align: middle" th:text="${user.username}">name</td>
-                    <td style="vertical-align: middle" th:text="${user.authority}">role</td>
-<!--                    <td style="vertical-align: middle" th:text="${users1[iterStat.index].enabled}">statue</td>-->
-                    <td style="vertical-align: middle" th:if="${users1[iterStat.index].enabled}">正常</td>
-                    <td style="vertical-align: middle" th:if="${!users1[iterStat.index].enabled}">禁用</td>
-                    <td class="timeline-footer" th:if="${user.id}ne'1'">
-                      <a th:href="@{/app/admin/edit(type='user', id=${user.id})}" class="btn btn-primary btn-sm">修改</a>
-                      <a th:href="@{/app/admin/delete(type='user', id=${user.id})}" class="btn btn-danger btn-sm">删除</a>
-                    <td style="vertical-align: middle" th:if="${user.id}eq'1'">无法操作</td>
-
+                  <tr th:each="adr, iterStat: ${adrs}">
+                    <td style="vertical-align: middle" th:text="${adr.id}">id</td>
+                    <td style="vertical-align: middle" th:text="${adr.Province}">Province</td>
+                    <td style="vertical-align: middle" th:text="${adr.city}">city</td>
+                    <td style="vertical-align: middle" th:text="${adr.street}">street</td>
+                    <!--                    <td style="vertical-align: middle" th:text="${users1[iterStat.index].enabled}">statue</td>-->
+                    <td class="timeline-footer">
+                      <a th:href="@{/app/deleteAdr(id=${adr.id})}" class="btn btn-danger btn-sm">删除</a>
                     </td>
-<!--                    <div class="timeline-footer">-->
-<!--                      <a th:href="@{/app/admin/edit(id=${bbs_1.id})}" class="btn btn-primary btn-sm" th:if ="${author}eq'[ROLE_ADMIN]'">修改</a>-->
-<!--                      <a th:href="@{/app/admin/delete(id=${bbs_1.id})}" class="btn btn-danger btn-sm" th:if ="${author}eq'[ROLE_ADMIN]'">删除</a>-->
-<!--                    </div>-->
+
                   </tr>
                 </table>
               </div>

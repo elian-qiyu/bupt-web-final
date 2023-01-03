@@ -232,4 +232,9 @@ public class OrderController {
         return "redirect:/app/admin/user";
     }
 
+    @GetMapping("/adr")
+    public String address(){
+        return "food/adr_list";
+    }
+
 }

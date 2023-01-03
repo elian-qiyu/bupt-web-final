@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BUPT订餐系统 | 新增BBS页面</title>
+  <title>BUPT订餐系统 | 新增地址页面</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -46,38 +46,40 @@
             </a>
           </li>
 
+
+
           <li class="nav-item">
-            <a href="../list" class="nav-link">
+            <a href="./list" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>库存页</p>
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
-            <a href="../admin/food_reg" class="nav-link">
+            <a href="./admin/food_reg" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>新增库存页面</p>
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
-            <a href="../admin/bbs_reg" class="nav-link active">
+            <a href="./admin/bbs_reg" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>新增BBS页面</p>
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_ADMIN]'">
-            <a href="../admin/user" class="nav-link">
+            <a href="./admin/user" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>用户管理页</p>
             </a>
           </li>
           <li class="nav-item" th:if ="${author}eq'[ROLE_USER]'">
-            <a href="../adr" class="nav-link">
+            <a href="./adr" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>地址管理页</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../logout" class="nav-link">
+            <a href="./../logout" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>登出</p>
             </a>
@@ -96,7 +98,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>新增BBS页面</h1>
+            <h1>新增地址页面</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -120,24 +122,27 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">请填写以下资料</h3>
+                <h3 class="card-title">新增地址请填写以下资料</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" action="/app/admin/submit/bbs" onsubmit="return checkForm()" enctype="multipart/form-data">
+              <form method="post" action="/app/admin/submit/food" onsubmit="return checkForm()" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>站内消息BBS标题</label>
-                    <input type="text" class="form-control" name="bbs_title" placeholder="输入站内消息BBS标题" required>
+                    <label>省份</label>
+                    <input type="text" class="form-control" name="Province" placeholder="输入省份" required>
                   </div>
                   <div class="form-group">
-                    <label>站内消息BBS內文</label>
-<!--                    <input type="text" class="form-control" id="num" name="num" placeholder="输入站内消息BBS內文" required>-->
-                    <textarea class="form-control" rows="3" name="bbs_body" placeholder="输入站内消息BBS內文 ..." required></textarea>
+                    <label>城市</label>
+                    <input type="number" class="form-control" name="city" placeholder="输入城市" required>
+                  </div>
+                  <div class="form-group">
+                    <label>街道</label>
+                    <input type="number" class="form-control" name="street" placeholder="输入街道" required>
                   </div>
                   <!-- Date dd/mm/yyyy -->
 <!--                  <div class="form-group">-->
-<!--                    <label>日期</label>-->
+<!--                    <label>价格</label>-->
 <!--                    <div class="input-group">-->
 <!--                      <div class="input-group-prepend">-->
 <!--                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>-->
@@ -150,18 +155,6 @@
 <!--                  <div class="form-group">-->
 <!--                    <label for="exampleInputPassword1">Password</label>-->
 <!--                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
-<!--                  </div>-->
-<!--                  <div class="form-group">-->
-<!--                    <label></label>上傳食物图片</label>-->
-<!--                    <div class="input-group">-->
-<!--                      <div class="custom-file">-->
-<!--                        <input type="file" class="custom-file-input" name="photo" accept="image/*" required>-->
-<!--                        <label class="custom-file-label">选择图片</label>-->
-<!--                      </div>-->
-<!--&lt;!&ndash;                      <div class="input-group-append">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <span class="input-group-text">上傳</span>&ndash;&gt;-->
-<!--&lt;!&ndash;                      </div>&ndash;&gt;-->
-<!--                    </div>-->
 <!--                  </div>-->
                 </div>
                 <!-- /.card-body -->

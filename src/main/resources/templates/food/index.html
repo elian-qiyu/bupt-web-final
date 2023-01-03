@@ -69,6 +69,12 @@
               <p>用户管理页</p>
             </a>
           </li>
+          <li class="nav-item" th:if ="${author}eq'[ROLE_USER]'">
+            <a href="./adr" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>地址管理页</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="../../logout" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
