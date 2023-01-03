@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.util.List;
+
 //用户表
 @Data
 public class Users {
@@ -12,7 +14,7 @@ public class Users {
 
     private String password;
     private Boolean enabled;
-
+    private List<Address> address;
 //    public Users(String username, String password, Boolean enabled) {
 //        this.username = username;
 //        this.password = password;
